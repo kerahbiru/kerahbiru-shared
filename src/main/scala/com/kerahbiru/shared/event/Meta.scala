@@ -1,6 +1,8 @@
 package com.kerahbiru.shared.event
 
-trait AggregateMeta {
+trait Meta {
 
   def aggregateName: String
+
+  def eventName: EventName
 }

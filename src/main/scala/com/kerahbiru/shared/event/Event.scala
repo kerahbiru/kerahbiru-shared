@@ -1,14 +1,16 @@
 package com.kerahbiru.shared.event
 
+import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.syntax.EncoderOps
+import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}
 
-import java.time.{OffsetDateTime, ZoneOffset}
 import java.util.UUID
+import scala.util.Try
 
 case class Event(
     id: UUID,
     version: Int,
-    ts: OffsetDateTime,
+    ts: Long,
     user: UUID,
     aggregate: String,
     name: EventName,
@@ -17,36 +19,14 @@ case class Event(
 
 object Event {
 
-  def nowUtc: OffsetDateTime = OffsetDateTime.now(ZoneOffset.UTC)
+  def nowUtc: Long = System.currentTimeMillis() / 1000
 
-  def apply(id: UUID, version: Int, user: UUID, eventData: EventData): Event =
-    eventData match {
-      case data: OrgCreatedData =>
-        Event(id, version, nowUtc, user, OrgCreatedData.aggregateName, EventName.OrgCreated, data.asJson.noSpaces)
-      case data: OrgUpdatedData =>
-        Event(id, version, nowUtc, user, OrgUpdatedData.aggregateName, EventName.OrgUpdated, data.asJson.noSpaces)
+  implicit val dec: Decoder[Event] = deriveDecoder
+  implicit val enc: Encoder[Event] = deriveEncoder
 
-      case data: OtpToEmailRequestedData =>
-        Event(
-          id,
-          version,
-          nowUtc,
-          user,
-          OtpToEmailRequestedData.aggregateName,
-          EventName.OtpToEmailRequested,
-          data.asJson.noSpaces
-        )
+  implicit val decodeUuidKey: KeyDecoder[UUID] =
+    KeyDecoder.instance(s => Try(UUID.fromString(s)).toOption)
 
-      case data: OtpToSmsRequestedData =>
-        Event(
-          id,
-          version,
-          nowUtc,
-          user,
-          OtpToSmsRequestedData.aggregateName,
-          EventName.OtpToSmsRequested,
-          data.asJson.noSpaces
-        )
-
-    }
+  implicit val encodeUuidKey: KeyEncoder[UUID] =
+    KeyEncoder.instance(_.toString)
 }

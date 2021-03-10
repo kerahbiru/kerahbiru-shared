@@ -4,7 +4,7 @@ import enumeratum._
 
 sealed trait EventName extends EnumEntry
 
-object EventName extends Enum[EventName] {
+object EventName extends Enum[EventName] with CirceEnum[EventName] {
 
   val values = findValues
 
