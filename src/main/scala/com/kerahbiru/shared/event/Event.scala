@@ -1,20 +1,19 @@
 package com.kerahbiru.shared.event
 
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
-import io.circe.syntax.EncoderOps
 import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}
 
 import java.util.UUID
 import scala.util.Try
 
-case class Event(
-    id: UUID,
-    version: Int,
-    ts: Long,
-    user: UUID,
-    aggregate: String,
-    name: EventName,
-    data: String
+class Event(
+    val id: UUID,
+    val version: Int,
+    val ts: Long,
+    val user: UUID,
+    val aggregate: String,
+    val name: EventName,
+    val data: String
 )
 
 object Event {
