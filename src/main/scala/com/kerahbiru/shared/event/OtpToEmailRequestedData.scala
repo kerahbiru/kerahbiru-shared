@@ -3,7 +3,7 @@ package com.kerahbiru.shared.event
 import io.circe.{Decoder, Encoder}
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 
-final case class OtpToEmailRequestedData(email: String, otp: String)
+final case class OtpToEmailRequestedData(email: String, otp: String) extends EventData
 
 object OtpToEmailRequestedData extends AggregateMeta {
   override val aggregateName: String = "authenticate"

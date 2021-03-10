@@ -3,7 +3,7 @@ package com.kerahbiru.shared.event
 import io.circe.{Decoder, Encoder}
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 
-final case class OtpToSmsRequestedData(phone: String, countryCode: String, otp: String)
+final case class OtpToSmsRequestedData(phone: String, countryCode: String, otp: String) extends EventData
 
 object OtpToSmsRequestedData extends AggregateMeta {
   override val aggregateName: String = "authenticate"

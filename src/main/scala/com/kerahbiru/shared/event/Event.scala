@@ -25,5 +25,28 @@ object Event {
         Event(id, version, nowUtc, user, OrgCreatedData.aggregateName, EventName.OrgCreated, data.asJson.noSpaces)
       case data: OrgUpdatedData =>
         Event(id, version, nowUtc, user, OrgUpdatedData.aggregateName, EventName.OrgUpdated, data.asJson.noSpaces)
+
+      case data: OtpToEmailRequestedData =>
+        Event(
+          id,
+          version,
+          nowUtc,
+          user,
+          OtpToEmailRequestedData.aggregateName,
+          EventName.OtpToEmailRequested,
+          data.asJson.noSpaces
+        )
+
+      case data: OtpToSmsRequestedData =>
+        Event(
+          id,
+          version,
+          nowUtc,
+          user,
+          OtpToSmsRequestedData.aggregateName,
+          EventName.OtpToSmsRequested,
+          data.asJson.noSpaces
+        )
+
     }
 }
