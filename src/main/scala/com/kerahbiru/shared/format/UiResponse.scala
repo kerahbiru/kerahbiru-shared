@@ -12,6 +12,8 @@ object UiResponse {
   def error[A](error: String): UiResponse[List[A]] =
     UiResponse[List[A]](isError = true, Some(error), List.empty[A])
 
+  def error1M(error: String): UiResponse[List[OneMessage]] = UiResponse.error[OneMessage](error)
+
   implicit def encoder[T: Encoder]: Encoder[UiResponse[T]] = deriveEncoder
 
   def just(message: String): UiResponse[List[OneMessage]] =
