@@ -3,6 +3,22 @@
 Sharable components.
 - events
 - jwt
+- format
+
+## Format
+### UiResponse
+Response format for UI.
+``` 
+{
+  isError: boolean,
+  error: string | null,
+  data: List[A]
+}
+
+```
+- `ok` : ok with data type A 
+- `error` : error with error message
+- `just` : ok with a single string message
 
 ## Event processing
 - Producer should create an event from its subclass (OtpToEmailRequested, etc)
