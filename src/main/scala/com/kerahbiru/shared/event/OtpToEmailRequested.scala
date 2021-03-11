@@ -28,10 +28,10 @@ object OtpToEmailRequested extends Meta {
   override val aggregateName: String = "authenticate"
   override val eventName: EventName  = EventName.OtpToEmailRequested
 
-  def apply(id: UUID, email: String, otp: String): Event =
-    OtpToEmailRequested(id, 0, Event.nowUtc, id, Data(email, otp))
+  def apply(id: UUID, email: String, countryCode: String, otp: String): Event =
+    OtpToEmailRequested(id, 0, Event.nowUtc, id, Data(email, countryCode, otp))
 
-  final case class Data(email: String, otp: String)
+  final case class Data(email: String, countryCode: String, otp: String)
 
   object Data {
 
