@@ -17,7 +17,7 @@ class OrgUpdatedTest extends AnyFlatSpec {
 
   it should "ok in encoding to json, decoding as event, decoding the data" in {
     val request = OrgUpdated(id, name, location, description)
-    val json    = request.asInstanceOf[Event].asJson.noSpaces
+    val json    = request.asJson.noSpaces
     val event   = decode[Event](json).toOption.get
     assert(event.id === id)
     assert(event.name === EventName.OrgUpdated)
