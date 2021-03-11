@@ -9,8 +9,8 @@ object UiResponse {
 
   def ok[A](data: A): UiResponse[A] = UiResponse(isError = false, None, data)
 
-  def error(error: String): UiResponse[List[String]] =
-    UiResponse[List[String]](isError = true, Some(error), List.empty[String])
+  def error[A](error: String): UiResponse[List[A]] =
+    UiResponse[List[A]](isError = true, Some(error), List.empty[A])
 
   implicit def encoder[T: Encoder]: Encoder[UiResponse[T]] = deriveEncoder
 

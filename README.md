@@ -17,7 +17,7 @@ Response format for UI.
 
 ```
 - `ok` : ok with data type A 
-- `error` : error with error message
+- `error` : error with data type A (A is unused but useful for coupling with `ok`)
 - `just` : ok with a single string message
 
 ## Event processing
