@@ -2,7 +2,7 @@ package com.kerahbiru.shared.event
 
 trait Meta {
 
-  def aggregateName: String
+  val aggregateName: String
 
-  def eventName: EventName
+  val eventName: EventName
 }

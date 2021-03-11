@@ -9,7 +9,7 @@ import scala.util.Try
 class Event(
     val id: UUID,
     val version: Int,
-    val ts: Long,
+    val iat: Long,
     val user: UUID,
     val aggregate: String,
     val name: EventName,

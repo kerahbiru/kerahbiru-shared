@@ -16,13 +16,13 @@ class OtpToEmailRequestedTest extends AnyFlatSpec {
   val email    = "a@b.com"
   val otp      = "12345"
 
-  it should "ok in encoding to json, decoding to event, retrieving payload" in {
+  it should "ok in encoding to json, decoding as event, decoding the data" in {
     val otpToEmailRequestedEvent = OtpToEmailRequested(id, email, otp)
     val json                     = otpToEmailRequestedEvent.asInstanceOf[Event].asJson.noSpaces
     val event                    = decode[Event](json).toOption.get
     assert(event.id === id)
     assert(event.name === EventName.OtpToEmailRequested)
-    val data = decode[OtpToEmailRequestedData](event.data).toOption.get
+    val data = decode[OtpToEmailRequested.Data](event.data).toOption.get
     assert(data.email === email)
     assert(data.otp === otp)
   }

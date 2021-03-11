@@ -1,25 +1,26 @@
 package com.kerahbiru.shared.event
 
-import io.circe
-import io.circe.{Decoder, Encoder}
+import com.kerahbiru.shared.event.OtpToEmailRequested.Data
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
-import io.circe.parser.decode
 import io.circe.syntax.EncoderOps
+import io.circe.{Decoder, Encoder}
+import OtpToEmailRequested.Data
 
 import java.util.UUID
 
-case class OtpToEmailRequested(
+final case class OtpToEmailRequested(
     override val id: UUID,
     override val version: Int,
+    override val iat: Long,
     override val user: UUID,
-    x: OtpToEmailRequestedData
+    x: Data
 ) extends Event(
       id,
       version,
-      Event.nowUtc,
+      iat,
       user,
       OtpToEmailRequested.aggregateName,
-      EventName.OtpToEmailRequested,
+      OtpToEmailRequested.eventName,
       x.asJson.noSpaces
     )
 
@@ -28,15 +29,15 @@ object OtpToEmailRequested extends Meta {
   override val eventName: EventName  = EventName.OtpToEmailRequested
 
   def apply(id: UUID, email: String, otp: String): Event =
-    OtpToEmailRequested(id, 0, id, OtpToEmailRequestedData(email, otp))
+    OtpToEmailRequested(id, 0, Event.nowUtc, id, Data(email, otp))
 
-}
+  final case class Data(email: String, otp: String)
 
-final case class OtpToEmailRequestedData(email: String, otp: String) extends EventData
+  object Data {
 
-object OtpToEmailRequestedData {
+    implicit val dec: Decoder[Data] = deriveDecoder
+    implicit val enc: Encoder[Data] = deriveEncoder
 
-  implicit val dec: Decoder[OtpToEmailRequestedData] = deriveDecoder
-  implicit val enc: Encoder[OtpToEmailRequestedData] = deriveEncoder
+  }
 
 }
