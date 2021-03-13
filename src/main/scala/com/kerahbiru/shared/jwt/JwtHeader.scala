@@ -22,7 +22,7 @@ case object Typ extends Enum[Typ] with CirceEnum[Typ] {
 
 object JwtHeader {
 
-  def apply: JwtHeader = new JwtHeader(RS256, JWT)
+  val typical: JwtHeader = new JwtHeader(RS256, JWT)
 
   implicit val enc: Encoder[JwtHeader] = deriveEncoder
   implicit val dec: Decoder[JwtHeader] = deriveDecoder
