@@ -1,5 +1,7 @@
 package com.kerahbiru.shared.jwt
 
+import com.kerahbiru.shared.jwt.Alg.RS256
+import com.kerahbiru.shared.jwt.Typ.JWT
 import enumeratum.{CirceEnum, Enum, EnumEntry}
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.{Decoder, Encoder}
@@ -15,12 +17,14 @@ object Alg extends Enum[Alg] with CirceEnum[Alg] {
 sealed trait Typ extends EnumEntry
 case object Typ extends Enum[Typ] with CirceEnum[Typ] {
   val values = findValues
-  case object JWT     extends Typ
+  case object JWT extends Typ
 }
 
-object JwtHeader{
+object JwtHeader {
+
+  def apply: JwtHeader = new JwtHeader(RS256, JWT)
+
   implicit val enc: Encoder[JwtHeader] = deriveEncoder
   implicit val dec: Decoder[JwtHeader] = deriveDecoder
-
 
 }
