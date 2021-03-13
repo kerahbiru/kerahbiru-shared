@@ -1,5 +1,6 @@
 package com.kerahbiru.shared.jwt
 
+import com.kerahbiru.shared.jwt.Role.findValues
 import enumeratum._
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}
@@ -14,7 +15,7 @@ final case class JwtPayload(
     sub: UUID,
     alias: String,
     role: Role,
-    plan: Plan
+    country: Country
 )
 
 sealed trait Role extends EnumEntry
@@ -24,11 +25,24 @@ object Role extends Enum[Role] with CirceEnum[Role] {
   case object org    extends Role
 }
 
-sealed trait Plan extends EnumEntry
-case object Plan extends Enum[Plan] with CirceEnum[Plan] {
+sealed trait Country extends EnumEntry
+object Country extends Enum[Country] with CirceEnum[Country] {
+
   val values = findValues
-  case object free     extends Plan
-  case object onemonth extends Plan
+  case object ID extends Country
+  case object PH extends Country
+  case object VN extends Country
+  case object SG extends Country
+  case object MY extends Country
+  case object TH extends Country
+  case object KH extends Country
+  case object LA extends Country
+  case object MM extends Country
+  case object BN extends Country
+  case object JP extends Country
+  case object TW extends Country
+  case object KR extends Country
+  case object HK extends Country
 }
 
 object JwtPayload {
