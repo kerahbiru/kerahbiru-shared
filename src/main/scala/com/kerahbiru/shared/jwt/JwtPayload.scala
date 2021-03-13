@@ -9,7 +9,7 @@ import java.util.UUID
 import scala.util.Try
 
 final case class JwtPayload(
-    iss: String,
+    iss: String = "https://www.kerahbiru.com",
     iat: Long,
     exp: Long,
     sub: UUID,
