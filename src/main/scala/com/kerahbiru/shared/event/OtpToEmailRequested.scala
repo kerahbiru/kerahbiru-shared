@@ -5,6 +5,7 @@ import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.syntax.EncoderOps
 import io.circe.{Decoder, Encoder}
 import OtpToEmailRequested.Data
+import com.kerahbiru.shared.jwt.Country
 
 import java.util.UUID
 
@@ -28,10 +29,10 @@ object OtpToEmailRequested extends Meta {
   override val aggregateName: String = "authenticate"
   override val eventName: EventName  = EventName.OtpToEmailRequested
 
-  def apply(id: UUID, email: String, country: String, otp: String): Event =
+  def apply(id: UUID, email: String, country: Country, otp: String): Event =
     OtpToEmailRequested(id, 0, Event.nowUtc, id, Data(email, country, otp))
 
-  final case class Data(email: String, country: String, otp: String)
+  final case class Data(email: String, country: Country, otp: String)
 
   object Data {
 

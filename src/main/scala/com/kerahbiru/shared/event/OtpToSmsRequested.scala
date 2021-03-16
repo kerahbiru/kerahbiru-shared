@@ -5,6 +5,7 @@ import io.circe.{Decoder, Encoder}
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.syntax.EncoderOps
 import OtpToSmsRequested.Data
+import com.kerahbiru.shared.jwt.Country
 
 import java.util.UUID
 
@@ -25,14 +26,14 @@ final case class OtpToSmsRequested(
     )
 
 object OtpToSmsRequested extends Meta {
-  def apply(id: UUID, phone: String, country: String, otp: String): Event =
+  def apply(id: UUID, phone: String, country: Country, otp: String): Event =
     OtpToSmsRequested(id, 0, Event.nowUtc, id, Data(phone, country, otp))
 
   override val aggregateName: String = "authenticate"
 
   override val eventName: EventName = EventName.OtpToSmsRequested
 
-  final case class Data(phone: String, country: String, otp: String)
+  final case class Data(phone: String, country: Country, otp: String)
 
   object Data {
     implicit val dec: Decoder[Data] = deriveDecoder
