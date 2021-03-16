@@ -25,8 +25,8 @@ final case class OtpToSmsRequested(
     )
 
 object OtpToSmsRequested extends Meta {
-  def apply(id: UUID, phone: String, countryCode: String, otp: String): Event =
-    OtpToSmsRequested(id, 0, Event.nowUtc, id, Data(phone, countryCode, otp))
+  def apply(id: UUID, phone: String, country: String, otp: String): Event =
+    OtpToSmsRequested(id, 0, Event.nowUtc, id, Data(phone, country, otp))
 
   override val aggregateName: String = "authenticate"
 
