@@ -32,7 +32,7 @@ object OtpToSmsRequested extends Meta {
 
   override val eventName: EventName = EventName.OtpToSmsRequested
 
-  final case class Data(phone: String, countryCode: String, otp: String)
+  final case class Data(phone: String, country: String, otp: String)
 
   object Data {
     implicit val dec: Decoder[Data] = deriveDecoder

@@ -31,7 +31,7 @@ object OtpToEmailRequested extends Meta {
   def apply(id: UUID, email: String, country: String, otp: String): Event =
     OtpToEmailRequested(id, 0, Event.nowUtc, id, Data(email, country, otp))
 
-  final case class Data(email: String, countryCode: String, otp: String)
+  final case class Data(email: String, country: String, otp: String)
 
   object Data {
 
