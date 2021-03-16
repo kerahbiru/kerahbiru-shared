@@ -23,7 +23,7 @@ class OtpToSmsRequestedTest extends AnyFlatSpec {
     assert(event.name === EventName.OtpToSmsRequested)
     val data = decode[OtpToSmsRequested.Data](event.data).toOption.get
     assert(data.phone === phone)
-    assert(data.countryCode === country)
+    assert(data.country === country)
     assert(data.otp === otp)
   }
 
