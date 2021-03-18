@@ -15,7 +15,7 @@ class ResponseTest extends AnyFlatSpec {
   }
 
   it should "ok encoding error" in {
-    val x = UiResponse.error[List[String]]("something bad").asJson.noSpaces
+    val x = UiResponse.error("something bad").asJson.noSpaces
     assert(x.contains("bad"))
   }
 
@@ -25,7 +25,7 @@ class ResponseTest extends AnyFlatSpec {
   }
 
   it should "ok encoding error with OneMessage type" in {
-    val x = UiResponse.error1M("something bad").asJson.noSpaces
+    val x = UiResponse.error("something bad").asJson.noSpaces
     assert(x.contains("bad"))
   }
 
