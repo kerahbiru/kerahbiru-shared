@@ -28,8 +28,8 @@ object OrgUpdated extends Meta {
 
   override val eventName: EventName = EventName.OrgUpdated
 
-  def apply(orgId: UUID, name: String, location: String, description: Option[String]): Event =
-    OrgUpdated(orgId, 0, Event.nowUtc, orgId, Data(name, location, description))
+  def apply(orgId: UUID, version: Int, name: String, location: String, description: Option[String]): Event =
+    OrgUpdated(orgId, version, Event.nowUtc, orgId, Data(name, location, description))
 
   final case class Data(
       name: String,
