@@ -24,3 +24,4 @@ libraryDependencies += "com.beachape" %%% "enumeratum"       % enumeratumVersion
 libraryDependencies += "com.beachape" %%% "enumeratum-circe" % enumeratumVersion
 
 npmDependencies in Compile += "libphonenumber-js" -> "1.9.12"
+npmDependencies in Compile += "uuid"              -> "8.3.2"
