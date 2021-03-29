@@ -14,6 +14,7 @@ class SecureDtoTest extends AnyFlatSpec {
     val y = x.asJson.noSpaces
     val z = decode[SecureDto](y).toOption.get
     assert(z.cipherText === data)
+    assert(z.salt.toString.nonEmpty)
   }
 
 }
