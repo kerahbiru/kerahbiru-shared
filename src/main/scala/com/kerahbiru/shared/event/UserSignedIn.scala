@@ -39,8 +39,8 @@ object UserSignedIn extends Meta {
   final case class Data(
       id: UUID,
       primary: String,
-      Role: Role,
-      Country: Country
+      role: Role,
+      country: Country
   )
 
 }
