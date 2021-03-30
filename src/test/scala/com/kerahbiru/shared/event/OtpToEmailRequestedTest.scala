@@ -20,10 +20,11 @@ class OtpToEmailRequestedTest extends AnyFlatSpec {
   val country   = "ID"
   val iat       = System.currentTimeMillis() / 1000
   val exp       = iat + 3600 * 24;
+  val id        = UUID5.v5(email)
 
   it should "ok in encoding to json, decoding as event, decoding the data" in {
     val otpToEmailRequestedEvent =
-      OtpToEmailRequested(email, 1, iat, key, otp, exp, Role.org, Country.withName(country))
+      OtpToEmailRequested(id, email, 1, iat, key, otp, exp, Role.org, Country.withName(country))
     val json  = otpToEmailRequestedEvent.asJson.noSpaces
     val event = decode[Event](json).toOption.get
     assert(event.name === EventName.OtpToEmailRequested)

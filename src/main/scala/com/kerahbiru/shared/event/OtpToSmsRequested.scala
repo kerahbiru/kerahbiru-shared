@@ -27,13 +27,20 @@ final case class OtpToSmsRequested(
     )
 
 object OtpToSmsRequested extends Meta {
-  val namespace = "4c1ca482-689b-4228-8d6d-a24a4678a59d"
 
-  def apply(phone: String, version: Int, iat: Long, key: UUID, otp: String, exp: Long, role: Role, country: Country)
-      : Event = {
-    val uuid = UUID.fromString(UUID5.v5(phone, namespace))
-    OtpToSmsRequested(uuid, version, iat, uuid, Data(phone, iat, key, otp, exp, role, country))
-  }
+  def apply(
+      id: UUID,
+      phone: String,
+      version: Int,
+      iat: Long,
+      key: UUID,
+      otp: String,
+      exp: Long,
+      role: Role,
+      country: Country
+  ): Event =
+    OtpToSmsRequested(id, version, iat, id, Data(phone, iat, key, otp, exp, role, country))
+
   override val aggregateName: String = "authenticate"
 
   override val eventName: EventName = EventName.OtpToSmsRequested

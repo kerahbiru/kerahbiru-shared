@@ -31,13 +31,18 @@ object OtpToEmailRequested extends Meta {
   override val aggregateName: String = "authenticate"
   override val eventName: EventName  = EventName.OtpToEmailRequested
 
-  val namespace = "4c1ca482-689b-4228-8d6d-a24a4678a59d"
-
-  def apply(email: String, version: Int, iat: Long, key: UUID, otp: String, exp: Long, role: Role, country: Country)
-      : Event = {
-    val uuid = UUID.fromString(UUID5.v5(email, namespace))
-    OtpToEmailRequested(uuid, version, iat, uuid, Data(email, iat, key, otp, exp, role, country))
-  }
+  def apply(
+      id: UUID,
+      email: String,
+      version: Int,
+      iat: Long,
+      key: UUID,
+      otp: String,
+      exp: Long,
+      role: Role,
+      country: Country
+  ): Event =
+    OtpToEmailRequested(id, version, iat, id, Data(email, iat, key, otp, exp, role, country))
 
   final case class Data(email: String, iat: Long, key: UUID, otp: String, exp: Long, role: Role, country: Country)
 

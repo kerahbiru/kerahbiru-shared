@@ -6,10 +6,14 @@ import scala.scalajs.js.annotation.JSImport
 
 @js.native
 @JSImport("uuid", JSImport.Namespace)
-object UUID5 extends js.Object {
+object NodeUUID extends js.Object {
+
+  val NIL: String = js.native
 
   def v5(x: String, nameSpace: String): String = js.native
 
-//  def fromSeed(x: String, nameSpace: String): UUID = UUID.fromString(v5(x, nameSpace))
+}
 
+object UUID5 {
+  def v5(x: String): UUID = UUID.fromString(NodeUUID.v5(x, NodeUUID.NIL))
 }
