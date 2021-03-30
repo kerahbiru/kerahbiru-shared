@@ -7,6 +7,7 @@ import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}
 import OtpToEmailRequested.Data
 import com.kerahbiru.shared.jwt.{Country, Role}
 import com.kerahbiru.shared.util.UUID5
+import io.circe.generic.auto._
 
 import java.util.UUID
 import scala.util.Try
@@ -45,17 +46,5 @@ object OtpToEmailRequested extends Meta {
     OtpToEmailRequested(id, version, iat, id, Data(email, iat, key, otp, exp, role, country))
 
   final case class Data(email: String, iat: Long, key: UUID, otp: String, exp: Long, role: Role, country: Country)
-
-  object Data {
-
-    implicit val dec: Decoder[Data] = deriveDecoder
-    implicit val enc: Encoder[Data] = deriveEncoder
-
-    implicit val decodeUuidKey: KeyDecoder[UUID] =
-      KeyDecoder.instance(s => Try(UUID.fromString(s)).toOption)
-
-    implicit val encodeUuidKey: KeyEncoder[UUID] =
-      KeyEncoder.instance(_.toString)
-  }
 
 }

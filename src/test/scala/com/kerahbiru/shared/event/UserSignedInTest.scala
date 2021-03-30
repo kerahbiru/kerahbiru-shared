@@ -4,15 +4,14 @@ import com.kerahbiru.shared.jwt.{Country, Role}
 import com.kerahbiru.shared.util.UUID5
 import io.circe.generic.auto._
 import io.circe.parser.decode
-import io.circe.syntax._
+import io.circe.syntax.EncoderOps
 import org.scalatest.flatspec.AnyFlatSpec
-import io.circe.generic.auto._
 
 import java.util.UUID
 
-class OtpToEmailRequestedTest extends AnyFlatSpec {
+class UserSignedInTest extends AnyFlatSpec {
 
-  behavior of "OtpToEmailRequested"
+  behavior of "UserSignedIn"
 
   val key: UUID = UUID.randomUUID()
   val email     = "a@b.com"
@@ -23,14 +22,11 @@ class OtpToEmailRequestedTest extends AnyFlatSpec {
   val id        = UUID5.v5(email)
 
   it should "ok in encoding to json, decoding as event, decoding the data" in {
-    val otpToEmailRequestedEvent =
-      OtpToEmailRequested(id, email, 1, iat, key, otp, exp, Role.org, Country.withName(country))
-    val json  = otpToEmailRequestedEvent.asJson.noSpaces
+    val x     = UserSignedIn(id, 1, iat, email, Role.org, Country.withName(country))
+    val json  = x.asJson.noSpaces
     val event = decode[Event](json).toOption.get
-    assert(event.name === EventName.OtpToEmailRequested)
-    val data = decode[OtpToEmailRequested.Data](event.data).toOption.get
-    assert(data.email === email)
-    assert(data.otp === otp)
+    assert(event.name === EventName.UserSignedIn)
+    val data = decode[UserSignedIn.Data](event.data).toOption.get
+    assert(data.primary === email)
   }
-
 }

@@ -2,13 +2,10 @@ package com.kerahbiru.shared.event
 
 import com.kerahbiru.shared.event.OtpToSmsRequested.Data
 import com.kerahbiru.shared.jwt.{Country, Role}
-import com.kerahbiru.shared.util.UUID5
-import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
+import io.circe.generic.auto._
 import io.circe.syntax.EncoderOps
-import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}
 
 import java.util.UUID
-import scala.util.Try
 
 final case class OtpToSmsRequested(
     override val id: UUID,
@@ -46,16 +43,5 @@ object OtpToSmsRequested extends Meta {
   override val eventName: EventName = EventName.OtpToSmsRequested
 
   final case class Data(phone: String, iat: Long, key: UUID, otp: String, exp: Long, role: Role, country: Country)
-
-  object Data {
-    implicit val dec: Decoder[Data] = deriveDecoder
-    implicit val enc: Encoder[Data] = deriveEncoder
-
-    implicit val decodeUuidKey: KeyDecoder[UUID] =
-      KeyDecoder.instance(s => Try(UUID.fromString(s)).toOption)
-
-    implicit val encodeUuidKey: KeyEncoder[UUID] =
-      KeyEncoder.instance(_.toString)
-  }
 
 }

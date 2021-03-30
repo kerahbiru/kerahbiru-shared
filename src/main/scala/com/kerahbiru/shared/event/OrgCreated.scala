@@ -4,6 +4,7 @@ import com.kerahbiru.shared.event.OrgCreated.Data
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.{Decoder, Encoder}
 import io.circe.syntax.EncoderOps
+import io.circe.generic.auto._
 
 import java.util.UUID
 
@@ -37,10 +38,4 @@ object OrgCreated extends Meta {
       description: Option[String]
   )
 
-  object Data {
-
-    implicit val dec: Decoder[Data] = deriveDecoder
-    implicit val enc: Encoder[Data] = deriveEncoder
-
-  }
 }
