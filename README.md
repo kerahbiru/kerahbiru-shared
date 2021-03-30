@@ -1,9 +1,8 @@
 # Kerahbiru Shared 
 
-Sharable components.
-- events
-- jwt
-- format
+
+## Circe Json decoding/encoding
+Use `import io.circe.generic.auto._` wherever there is json encoding/decoding
 
 ## Format
 ### UiResponse
@@ -30,5 +29,6 @@ Response format for UI.
 |---|---|-------|
 |OrgCreated|org|organization creation|
 |OrgUpdated|org|organization info update|
-|OtpToEmailRequested|authenticate (unused)|authentication requesting OTP to email |
-|OtpToSmsRequested|authenticate (unused)|authentication requesting OTP to sms |
+|OtpToEmailRequested|otp|authentication requesting OTP to email |
+|OtpToSmsRequested|otp|authentication requesting OTP to sms |
+|UserSignedIn|authenticate|granting token to user|
