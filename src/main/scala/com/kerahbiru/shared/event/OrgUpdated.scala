@@ -1,6 +1,7 @@
 package com.kerahbiru.shared.event
 
 import com.kerahbiru.shared.event.OrgUpdated.Data
+import com.kerahbiru.shared.aggmeta.AggregateName
 import io.circe.syntax.EncoderOps
 import io.circe.generic.auto._
 
@@ -23,7 +24,7 @@ final case class OrgUpdated(
     )
 
 object OrgUpdated extends Meta {
-  override val aggregateName: String = "org"
+  override val aggregateName = AggregateName.org
 
   override val eventName: EventName = EventName.OrgUpdated
 

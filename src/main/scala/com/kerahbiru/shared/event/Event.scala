@@ -1,5 +1,7 @@
 package com.kerahbiru.shared.event
 
+import com.kerahbiru.shared.aggmeta.AggregateName
+
 import java.util.UUID
 
 class Event(
@@ -7,7 +9,7 @@ class Event(
     val version: Int,
     val iat: Long,
     val user: UUID,
-    val aggregate: String,
+    val aggregate: AggregateName,
     val name: EventName,
     val data: String
 )
