@@ -1,5 +1,6 @@
 package com.kerahbiru.shared.event
 
+import com.kerahbiru.shared.aggmeta.AggregateName
 import com.kerahbiru.shared.event.UserSignedIn.Data
 import com.kerahbiru.shared.jwt.{Country, Role}
 import io.circe.generic.auto._
@@ -24,8 +25,9 @@ final case class UserSignedIn(
     )
 
 object UserSignedIn extends Meta {
-  override val aggregateName: String = "authenticate"
-  override val eventName: EventName  = EventName.UserSignedIn
+  override val aggregateName: AggregateName = AggregateName.authenticate
+
+  override val eventName: EventName = EventName.UserSignedIn
 
   def apply(id: UUID, version: Int, iat: Long, primary: String, role: Role, country: Country): Event =
     new UserSignedIn(

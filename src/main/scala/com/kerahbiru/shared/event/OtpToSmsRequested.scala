@@ -1,5 +1,6 @@
 package com.kerahbiru.shared.event
 
+import com.kerahbiru.shared.aggmeta.AggregateName
 import com.kerahbiru.shared.event.OtpToSmsRequested.Data
 import com.kerahbiru.shared.jwt.{Country, Role}
 import io.circe.generic.auto._
@@ -38,7 +39,7 @@ object OtpToSmsRequested extends Meta {
   ): Event =
     OtpToSmsRequested(id, version, iat, id, Data(phone, iat, key, otp, exp, role, country))
 
-  override val aggregateName: String = "authenticate"
+  override val aggregateName: AggregateName = AggregateName.otp
 
   override val eventName: EventName = EventName.OtpToSmsRequested
 

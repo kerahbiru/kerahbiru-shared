@@ -1,5 +1,6 @@
 package com.kerahbiru.shared.event
 
+import com.kerahbiru.shared.aggmeta.AggregateName
 import com.kerahbiru.shared.event.OrgCreated.Data
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.{Decoder, Encoder}
@@ -25,7 +26,7 @@ final case class OrgCreated(
     )
 
 object OrgCreated extends Meta {
-  override val aggregateName: String = "org"
+  override val aggregateName: AggregateName = AggregateName.org
 
   override val eventName: EventName = EventName.OrgCreated
 

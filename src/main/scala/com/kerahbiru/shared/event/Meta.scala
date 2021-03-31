@@ -4,7 +4,7 @@ import com.kerahbiru.shared.aggmeta.AggregateName
 
 trait Meta {
 
-  val aggregateName: AggregateName
+  def aggregateName: AggregateName
 
-  val eventName: EventName
+  def eventName: EventName
 }

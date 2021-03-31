@@ -24,7 +24,7 @@ final case class OrgUpdated(
     )
 
 object OrgUpdated extends Meta {
-  override val aggregateName = AggregateName.org
+  override val aggregateName: AggregateName = AggregateName.org
 
   override val eventName: EventName = EventName.OrgUpdated
 

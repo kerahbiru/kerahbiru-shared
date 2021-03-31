@@ -5,6 +5,7 @@ import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.syntax.EncoderOps
 import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}
 import OtpToEmailRequested.Data
+import com.kerahbiru.shared.aggmeta.AggregateName
 import com.kerahbiru.shared.jwt.{Country, Role}
 import com.kerahbiru.shared.util.UUID5
 import io.circe.generic.auto._
@@ -29,8 +30,8 @@ final case class OtpToEmailRequested(
     )
 
 object OtpToEmailRequested extends Meta {
-  override val aggregateName: String = "authenticate"
-  override val eventName: EventName  = EventName.OtpToEmailRequested
+  override val aggregateName: AggregateName = AggregateName.otp
+  override val eventName: EventName         = EventName.OtpToEmailRequested
 
   def apply(
       id: UUID,
