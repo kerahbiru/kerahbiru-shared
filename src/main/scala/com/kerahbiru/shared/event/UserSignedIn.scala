@@ -25,7 +25,7 @@ final case class UserSignedIn(
     )
 
 object UserSignedIn extends Meta {
-  override val aggregateName: AggregateName = AggregateName.authenticate
+  override val aggregateName: AggregateName = AggregateName.user
 
   override val eventName: EventName = EventName.UserSignedIn
 

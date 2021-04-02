@@ -8,9 +8,9 @@ object AggregateName extends Enum[AggregateName] with CirceEnum[AggregateName] {
 
   val values: IndexedSeq[AggregateName] = findValues
 
-  case object org          extends AggregateName
-  case object otp          extends AggregateName
-  case object authenticate extends AggregateName
+  case object org  extends AggregateName
+  case object otp  extends AggregateName
+  case object user extends AggregateName
 
 }
 
