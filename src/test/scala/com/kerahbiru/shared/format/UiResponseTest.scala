@@ -4,7 +4,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 import io.circe.syntax._
 import io.circe.generic.auto._
 
-class ResponseTest extends AnyFlatSpec {
+class UiResponseTest extends AnyFlatSpec {
 
   behavior of "Response"
 
@@ -30,4 +30,9 @@ class ResponseTest extends AnyFlatSpec {
     assert(x.contains("bad"))
   }
 
+  it should "ok encoding option" in {
+    val data = None
+    val x    = UiResponse.ok[Option[String]](data).asJson.noSpaces
+    assert(x.contains("\"data\":null}"))
+  }
 }
