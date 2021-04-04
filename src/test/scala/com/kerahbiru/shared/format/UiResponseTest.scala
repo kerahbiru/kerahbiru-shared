@@ -2,6 +2,7 @@ package com.kerahbiru.shared.format
 
 import org.scalatest.flatspec.AnyFlatSpec
 import io.circe.syntax._
+import io.circe.generic.auto._
 
 class ResponseTest extends AnyFlatSpec {
 
