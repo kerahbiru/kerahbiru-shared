@@ -14,7 +14,7 @@ object JwtContent {
 
   private def decodeBase64(encoded: String) = new String(Base64.getUrlDecoder.decode(encoded), StandardCharsets.UTF_8)
 
-  def parseToken(s: String): Either[Throwable, JwtContent] =
+  def parseToken(s: String): Option[JwtContent] =
     Try {
       val x = s.split("[.]")
       if (x.size != 3) throw new Exception() //Scalajs doesn't catch fatal exceptions
@@ -24,8 +24,8 @@ object JwtContent {
       val jwtPayload = decode[JwtPayload](decodeBase64(x(1))).toOption.get
       JwtContent(jwtHeader, jwtPayload, msg, sig)
     } match {
-      case Success(value) => Right(value)
-      case Failure(e)     => Left(e)
+      case Success(value) => Some(value)
+      case Failure(_)     => None
     }
 
   def encodeJwtHeaderPayload(jwtPayload: JwtPayload, jwtHeader: JwtHeader): String =
