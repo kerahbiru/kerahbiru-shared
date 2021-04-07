@@ -11,7 +11,12 @@ final case class HttpPayload(
 
 object HttpPayload {
 
-  def apply(path: String, pathParameters: Map[String, String], body: String, tokenHeader: Option[String]): HttpPayload =
+  def build(
+      path: String,
+      pathParameters: Map[String, String],
+      body: String,
+      tokenHeader: Option[String]
+  ): HttpPayload =
     HttpPayload(path, pathParameters, body, tokenHeader.flatMap(JwtContent.parseToken))
 
 }
