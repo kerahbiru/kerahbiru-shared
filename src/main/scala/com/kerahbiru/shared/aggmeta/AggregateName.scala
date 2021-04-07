@@ -16,9 +16,9 @@ object AggregateName extends Enum[AggregateName] with CirceEnum[AggregateName] {
 
 case class EsTable(aggregateName: AggregateName) {
 
-  def name: String = s"es-${aggregateName.entryName}"
+  def name: String = s"es_${aggregateName.entryName}"
 }
 
 case class QueryTable(aggregateName: AggregateName) {
-  def name: String = s"query-${aggregateName.entryName}"
+  def name: String = s"query_${aggregateName.entryName}"
 }
