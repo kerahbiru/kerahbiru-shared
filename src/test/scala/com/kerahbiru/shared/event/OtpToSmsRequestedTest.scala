@@ -1,7 +1,6 @@
 package com.kerahbiru.shared.event
 
 import com.kerahbiru.shared.jwt.{Country, Role}
-import com.kerahbiru.shared.util.UUID5
 import io.circe.parser.decode
 import io.circe.syntax.EncoderOps
 import org.scalatest.flatspec.AnyFlatSpec
@@ -18,7 +17,7 @@ class OtpToSmsRequestedTest extends AnyFlatSpec {
   val otp       = "12345"
   val iat       = System.currentTimeMillis() / 1000
   val exp       = iat + 3600 * 24;
-  val id        = UUID5.v5(phone)
+  val id        = UUID.randomUUID()
 
   it should "ok in encoding to json, decoding as event, decoding the data" in {
     val otpToSmsRequested = OtpToSmsRequested(id, phone, 1, iat, key, otp, exp, Role.org, Country.withName(country))

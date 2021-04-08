@@ -1,6 +1,5 @@
 package com.kerahbiru.shared.event
 
-import com.kerahbiru.shared.aggmeta.AggregateName
 import com.kerahbiru.shared.event.OtpToEmailRequested.Data
 import com.kerahbiru.shared.jwt.{Country, Role}
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}

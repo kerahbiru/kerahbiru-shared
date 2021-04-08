@@ -3,7 +3,7 @@ package com.kerahbiru.shared.jwt
 import io.circe.parser.decode
 import org.scalatest.flatspec.AnyFlatSpec
 
-class JwtHeaderTest extends AnyFlatSpec{
+class JwtHeaderTest extends AnyFlatSpec {
 
   behavior of "JwtHeader"
 

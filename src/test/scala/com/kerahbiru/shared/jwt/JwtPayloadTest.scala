@@ -11,18 +11,19 @@ class JwtPayloadTest extends AnyFlatSpec {
   behavior of "JwtPayload"
 
   val uuid = UUID.randomUUID()
+
   def json(uuidString: String, role: String, country: String) =
     s"""
-      |{
-      |  "iss": "https://www.kerahbiru.com",
-      |  "iat": "1614903762",
-      |  "exp": "1835782484",
-      |  "sub": "$uuidString",
-      |  "alias": "mbcu",
-      |  "role": "$role",
-      |  "country": "$country"
-      |}
-      |""".stripMargin
+       |{
+       |  "iss": "https://www.kerahbiru.com",
+       |  "iat": "1614903762",
+       |  "exp": "1835782484",
+       |  "sub": "$uuidString",
+       |  "alias": "mbcu",
+       |  "role": "$role",
+       |  "country": "$country"
+       |}
+       |""".stripMargin
 
   it should "ok decoding with correctly formatted json" in {
     val x = decode[JwtPayload](json(uuid.toString, Role.worker.entryName, ID.entryName))

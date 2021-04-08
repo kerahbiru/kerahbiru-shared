@@ -1,11 +1,10 @@
 package com.kerahbiru.shared.event
 
-import com.kerahbiru.shared.aggmeta.AggregateName
 import com.kerahbiru.shared.event.OtpToSmsRequested.Data
 import com.kerahbiru.shared.jwt.{Country, Role}
-import io.circe.{Decoder, Encoder}
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.syntax.EncoderOps
+import io.circe.{Decoder, Encoder}
 
 import java.util.UUID
 

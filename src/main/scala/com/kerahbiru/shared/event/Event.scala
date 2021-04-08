@@ -1,11 +1,9 @@
 package com.kerahbiru.shared.event
 
-import com.kerahbiru.shared.aggmeta.AggregateName
-import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
+import io.circe.{Decoder, Encoder}
 
 import java.util.UUID
-import scala.util.Try
 
 class Event(
     val id: UUID,

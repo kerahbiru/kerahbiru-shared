@@ -1,13 +1,11 @@
 package com.kerahbiru.shared.event
 
-import com.kerahbiru.shared.aggmeta.AggregateName
 import com.kerahbiru.shared.event.OrgCreated.Data
-import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.syntax.EncoderOps
+import io.circe.{Decoder, Encoder}
 
 import java.util.UUID
-import scala.util.Try
 
 final case class OrgCreated(
     override val id: UUID,
