@@ -19,8 +19,8 @@ object Event {
 
   def nowUtc: Long = System.currentTimeMillis() / 1000
 
-  implicit val dec: Decoder[Event] = deriveDecoder
-  implicit val enc: Encoder[Event] = deriveEncoder
+//  implicit val dec: Decoder[Event] = deriveDecoder
+//  implicit val enc: Encoder[Event] = deriveEncoder
 
 //  implicit val decodeUuidKey: KeyDecoder[UUID] =
 //    KeyDecoder.instance(s => Try(UUID.fromString(s)).toOption)

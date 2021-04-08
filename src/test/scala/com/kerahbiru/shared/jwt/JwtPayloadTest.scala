@@ -1,6 +1,7 @@
 package com.kerahbiru.shared.jwt
 
 import com.kerahbiru.shared.jwt.Country.ID
+import io.circe.generic.auto._
 import io.circe.parser.decode
 import org.scalatest.flatspec.AnyFlatSpec
 

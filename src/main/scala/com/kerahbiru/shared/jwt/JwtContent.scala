@@ -1,5 +1,6 @@
 package com.kerahbiru.shared.jwt
 
+import io.circe.generic.auto._
 import io.circe.parser.decode
 import io.circe.syntax.EncoderOps
 
