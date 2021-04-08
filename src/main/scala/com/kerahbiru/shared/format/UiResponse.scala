@@ -22,7 +22,8 @@ object UiResponse {
     val salt: String
   }
 
-//  implicit def dec[T: Decoder]: Decoder[UiResponse[T]] = deriveDecoder[UiResponse[T]]
+  implicit def enc[T: Encoder]: Encoder[UiResponse[T]] = deriveEncoder
+  implicit def dec[T: Decoder]: Decoder[UiResponse[T]] = deriveDecoder
 //  implicit def enc[T: Decoder]: Encoder.AsObject[UiResponse[T]] = deriveEncoder[UiResponse[T]]
 }
 

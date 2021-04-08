@@ -1,8 +1,7 @@
 package com.kerahbiru.shared.format
 
-import org.scalatest.flatspec.AnyFlatSpec
 import io.circe.syntax._
-import io.circe.generic.auto._
+import org.scalatest.flatspec.AnyFlatSpec
 
 class UiResponseTest extends AnyFlatSpec {
 
