@@ -20,7 +20,6 @@ libraryDependencies += "io.circe" %%% "circe-generic" % circeVersion
 libraryDependencies += "io.circe" %%% "circe-parser"  % circeVersion
 
 val enumeratumVersion = "1.6.1"
-libraryDependencies += "com.beachape" %%% "enumeratum"       % enumeratumVersion
 libraryDependencies += "com.beachape" %%% "enumeratum-circe" % enumeratumVersion
 
 npmDependencies in Compile += "libphonenumber-js" -> "1.9.12"
