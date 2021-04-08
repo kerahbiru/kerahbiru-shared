@@ -2,12 +2,12 @@ package com.kerahbiru.shared.event
 
 import com.kerahbiru.shared.aggmeta.AggregateName
 import com.kerahbiru.shared.event.OrgCreated.Data
+import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
-import io.circe.{Decoder, Encoder}
 import io.circe.syntax.EncoderOps
-import io.circe.generic.auto._
 
 import java.util.UUID
+import scala.util.Try
 
 final case class OrgCreated(
     override val id: UUID,
@@ -38,5 +38,16 @@ object OrgCreated extends Meta {
       location: String,
       description: Option[String]
   )
+
+  object Data {
+    implicit val dec: Decoder[Data] = deriveDecoder
+    implicit val enc: Encoder[Data] = deriveEncoder
+
+//    implicit val decodeUuidKey: KeyDecoder[UUID] =
+//      KeyDecoder.instance(s => Try(UUID.fromString(s)).toOption)
+//
+//    implicit val encodeUuidKey: KeyEncoder[UUID] =
+//      KeyEncoder.instance(_.toString)
+  }
 
 }

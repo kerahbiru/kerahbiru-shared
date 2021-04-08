@@ -3,7 +3,8 @@ package com.kerahbiru.shared.event
 import com.kerahbiru.shared.aggmeta.AggregateName
 import com.kerahbiru.shared.event.UserSignedIn.Data
 import com.kerahbiru.shared.jwt.{Country, Role}
-import io.circe.generic.auto._
+import io.circe.{Decoder, Encoder}
+import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.syntax.EncoderOps
 
 import java.util.UUID
@@ -44,5 +45,10 @@ object UserSignedIn extends Meta {
       role: Role,
       country: Country
   )
+
+  object Data {
+    implicit val dec: Decoder[Data] = deriveDecoder
+    implicit val enc: Encoder[Data] = deriveEncoder
+  }
 
 }

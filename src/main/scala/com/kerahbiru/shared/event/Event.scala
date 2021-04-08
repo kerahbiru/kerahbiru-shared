@@ -1,8 +1,11 @@
 package com.kerahbiru.shared.event
 
 import com.kerahbiru.shared.aggmeta.AggregateName
+import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}
+import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 
 import java.util.UUID
+import scala.util.Try
 
 class Event(
     val id: UUID,
@@ -18,9 +21,9 @@ object Event {
 
   def nowUtc: Long = System.currentTimeMillis() / 1000
 
-//  implicit val dec: Decoder[Event] = deriveDecoder
-//  implicit val enc: Encoder[Event] = deriveEncoder
-//
+  implicit val dec: Decoder[Event] = deriveDecoder
+  implicit val enc: Encoder[Event] = deriveEncoder
+
 //  implicit val decodeUuidKey: KeyDecoder[UUID] =
 //    KeyDecoder.instance(s => Try(UUID.fromString(s)).toOption)
 //

@@ -2,7 +2,6 @@ package com.kerahbiru.shared.event
 
 import com.kerahbiru.shared.jwt.{Country, Role}
 import com.kerahbiru.shared.util.UUID5
-import io.circe.generic.auto._
 import io.circe.parser.decode
 import io.circe.syntax.EncoderOps
 import org.scalatest.flatspec.AnyFlatSpec

@@ -3,7 +3,6 @@ package com.kerahbiru.shared.event
 import io.circe.parser.decode
 import io.circe.syntax.EncoderOps
 import org.scalatest.flatspec.AnyFlatSpec
-import io.circe.generic.auto._
 
 import java.util.UUID
 

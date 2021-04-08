@@ -3,7 +3,8 @@ package com.kerahbiru.shared.event
 import com.kerahbiru.shared.aggmeta.AggregateName
 import com.kerahbiru.shared.event.OtpToSmsRequested.Data
 import com.kerahbiru.shared.jwt.{Country, Role}
-import io.circe.generic.auto._
+import io.circe.{Decoder, Encoder}
+import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.syntax.EncoderOps
 
 import java.util.UUID
@@ -45,4 +46,8 @@ object OtpToSmsRequested extends Meta {
 
   final case class Data(phone: String, iat: Long, key: UUID, otp: String, exp: Long, role: Role, country: Country)
 
+  object Data {
+    implicit val dec: Decoder[Data] = deriveDecoder
+    implicit val enc: Encoder[Data] = deriveEncoder
+  }
 }

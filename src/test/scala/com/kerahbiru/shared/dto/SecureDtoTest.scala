@@ -2,7 +2,6 @@ package com.kerahbiru.shared.dto
 
 import com.kerahbiru.shared.format.UiResponse.Salted
 import com.kerahbiru.shared.jwt.Role
-import io.circe.generic.auto._
 import io.circe.parser.decode
 import io.circe.syntax.EncoderOps
 import org.scalatest.flatspec.AnyFlatSpec

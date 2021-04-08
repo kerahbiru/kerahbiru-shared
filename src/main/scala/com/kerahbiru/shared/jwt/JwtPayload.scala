@@ -1,6 +1,5 @@
 package com.kerahbiru.shared.jwt
 
-import com.kerahbiru.shared.jwt.Role.findValues
 import enumeratum._
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 import io.circe.{Decoder, Encoder, KeyDecoder, KeyEncoder}

@@ -5,7 +5,6 @@ import io.circe.syntax.EncoderOps
 import org.scalatest.flatspec.AnyFlatSpec
 
 import java.util.UUID
-import io.circe.generic.auto._
 
 class OrgUpdatedTest extends AnyFlatSpec {
 

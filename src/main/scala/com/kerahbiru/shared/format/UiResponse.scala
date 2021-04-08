@@ -1,7 +1,7 @@
 package com.kerahbiru.shared.format
 
-import io.circe.Encoder
-import io.circe.generic.auto._
+import io.circe.{Decoder, Encoder}
+import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
 
 final case class UiResponse[A](isError: Boolean, isEncrypted: Boolean, error: Option[String], data: A)
 
@@ -22,19 +22,23 @@ object UiResponse {
     val salt: String
   }
 
+//  implicit def dec[T: Decoder]: Decoder[UiResponse[T]] = deriveDecoder[UiResponse[T]]
+//  implicit def enc[T: Decoder]: Encoder.AsObject[UiResponse[T]] = deriveEncoder[UiResponse[T]]
 }
 
 final case class Empty()
-//
-//object Empty {
-//
-//  implicit val enc: Encoder[Empty] = deriveEncoder
-//
-//}
+
+object Empty {
+
+  implicit val enc: Encoder[Empty] = deriveEncoder
+  implicit val dec: Decoder[Empty] = deriveDecoder
+
+}
 
 final case class OneMessage(message: String)
-//object OneMessage {
-//
-//  implicit val enc: Encoder[OneMessage] = deriveEncoder
-//
-//}
+object OneMessage {
+
+  implicit val enc: Encoder[OneMessage] = deriveEncoder
+  implicit val dec: Decoder[OneMessage] = deriveDecoder
+
+}

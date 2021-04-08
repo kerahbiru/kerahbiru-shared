@@ -2,7 +2,6 @@ package com.kerahbiru.shared.jwt
 
 import com.kerahbiru.shared.jwt.Country.ID
 import io.circe.parser.decode
-import javafx.concurrent.Worker
 import org.scalatest.flatspec.AnyFlatSpec
 
 import java.util.UUID
