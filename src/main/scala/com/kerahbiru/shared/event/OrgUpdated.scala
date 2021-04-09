@@ -15,6 +15,7 @@ final case class OrgUpdated(
 ) extends Event(
       id,
       version,
+      Event.vhash(version),
       iat,
       user,
       OrgUpdated.aggregateName,
@@ -28,7 +29,7 @@ object OrgUpdated extends Meta {
   override val eventName: EventName = EventName.OrgUpdated
 
   def apply(orgId: UUID, version: Int, name: String, location: String, description: Option[String]): Event =
-    OrgUpdated(orgId, version, Event.nowUtc, orgId, Data(name, location, description))
+    OrgUpdated(orgId, version, System.currentTimeMillis() / 1000, orgId, Data(name, location, description))
 
   final case class Data(
       name: String,

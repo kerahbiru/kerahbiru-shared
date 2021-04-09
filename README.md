@@ -1,23 +1,13 @@
 # Kerahbiru Shared 
 
+## Event
+|id|version|vhash|iat|user|aggregate|name|data|
+|---|---|---|---|---|---|---|---|
+|UUID|Int|String|Long|UUID|AggragateName|EventName|String|
+|eventId|event version|obfuscated version|ts(second) issuance|user responsible for creation|aggregate name|event name|data in json|
 
 ## Circe Json decoding/encoding
 Use `import io.circe.generic.auto._` wherever there is json encoding/decoding
-
-## Format
-### UiResponse
-Response format for UI.
-``` 
-{
-  isError: boolean,
-  error: string | null,
-  data: List[A]
-}
-
-```
-- `ok` : ok with data type A 
-- `error` : error with data type A (A is unused but useful for coupling with `ok`)
-- `just` : ok with a single string message
 
 ## Event processing
 - Producer should create an event from its subclass (OtpToEmailRequested, etc)

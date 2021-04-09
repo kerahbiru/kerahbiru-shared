@@ -16,6 +16,7 @@ final case class OtpToEmailRequested(
 ) extends Event(
       id,
       version,
+      Event.vhash(version),
       iat,
       user,
       OtpToEmailRequested.aggregateName,

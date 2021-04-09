@@ -16,6 +16,7 @@ final case class OtpToSmsRequested(
 ) extends Event(
       id,
       version,
+      Event.vhash(version),
       iat,
       user,
       OtpToSmsRequested.aggregateName,

@@ -26,7 +26,6 @@ class OrgCreatedTest extends AnyFlatSpec {
     assert(data.name === name)
     assert(data.location === location)
     assert(data.description === description)
-
   }
 
 }

@@ -16,6 +16,7 @@ final case class UserSignedIn(
 ) extends Event(
       id,
       version,
+      Event.vhash(version),
       iat,
       id,
       UserSignedIn.aggregateName,

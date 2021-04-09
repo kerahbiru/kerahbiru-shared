@@ -1,13 +1,11 @@
 package com.kerahbiru.shared.event
 
-import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
-import io.circe.{Decoder, Encoder}
-
 import java.util.UUID
 
 class Event(
     val id: UUID,
     val version: Int,
+    val vhash: String,
     val iat: Long,
     val user: UUID,
     val aggregate: AggregateName,
@@ -17,7 +15,7 @@ class Event(
 
 object Event {
 
-  def nowUtc: Long = System.currentTimeMillis() / 1000
+  def vhash(version: Int): String = UUID.randomUUID().toString.split("[-]")(0)
 
 //  implicit val dec: Decoder[Event] = deriveDecoder
 //  implicit val enc: Encoder[Event] = deriveEncoder
