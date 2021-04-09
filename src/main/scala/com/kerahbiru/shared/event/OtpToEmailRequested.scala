@@ -10,13 +10,14 @@ import java.util.UUID
 final case class OtpToEmailRequested(
     override val id: UUID,
     override val version: Int,
+    key: UUID,
     override val iat: Long,
     override val user: UUID,
     x: Data
 ) extends Event(
       id,
       version,
-      Event.vhash(version),
+      key.toString,
       iat,
       user,
       OtpToEmailRequested.aggregateName,
@@ -39,7 +40,7 @@ object OtpToEmailRequested extends Meta {
       role: Role,
       country: Country
   ): Event =
-    OtpToEmailRequested(id, version, iat, id, Data(email, iat, key, otp, exp, role, country))
+    OtpToEmailRequested(id, version, key, iat, id, Data(email, iat, key, otp, exp, role, country))
 
   final case class Data(email: String, iat: Long, key: UUID, otp: String, exp: Long, role: Role, country: Country)
 

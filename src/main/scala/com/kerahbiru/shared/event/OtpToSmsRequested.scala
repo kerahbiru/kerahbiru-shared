@@ -10,13 +10,14 @@ import java.util.UUID
 final case class OtpToSmsRequested(
     override val id: UUID,
     override val version: Int,
+    val key: UUID,
     override val iat: Long,
     override val user: UUID,
     x: Data
 ) extends Event(
       id,
       version,
-      Event.vhash(version),
+      key.toString,
       iat,
       user,
       OtpToSmsRequested.aggregateName,
@@ -37,7 +38,7 @@ object OtpToSmsRequested extends Meta {
       role: Role,
       country: Country
   ): Event =
-    OtpToSmsRequested(id, version, iat, id, Data(phone, iat, key, otp, exp, role, country))
+    OtpToSmsRequested(id, version, key, iat, id, Data(phone, iat, key, otp, exp, role, country))
 
   override val aggregateName: AggregateName = AggregateName.otp
 
