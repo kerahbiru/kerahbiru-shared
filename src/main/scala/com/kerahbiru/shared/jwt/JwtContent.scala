@@ -4,6 +4,7 @@ import cats.Monad
 import io.circe.generic.auto._
 import io.circe.parser.decode
 import io.circe.syntax.EncoderOps
+import monix.eval.Task
 
 import java.nio.charset.StandardCharsets
 import java.util.Base64
@@ -37,13 +38,13 @@ object JwtContent {
       .map(Base64.getUrlEncoder.withoutPadding().encodeToString)
       .mkString(".")
 
-  def create(signer: String => Future[String], jwtPayload: JwtPayload, jwtHeader: JwtHeader = JwtHeader.typical)(
-      implicit scheduler: ExecutionContext
-  ): Future[String] =
+  def create(signer: String => Task[String], jwtPayload: JwtPayload, jwtHeader: JwtHeader = JwtHeader.typical)(implicit
+      scheduler: ExecutionContext
+  ): Task[String] =
     for {
-      a <- Future(buildPreSign(jwtPayload, jwtHeader))
+      a <- Task(buildPreSign(jwtPayload, jwtHeader))
       b <- signer(a)
-      c <- Future(s"$a.$b")
+      c <- Task(s"$a.$b")
     } yield c
 
 }

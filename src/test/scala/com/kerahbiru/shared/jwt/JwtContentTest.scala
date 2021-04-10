@@ -1,18 +1,19 @@
 package com.kerahbiru.shared.jwt
 
+import monix.eval.Task
 import org.scalatest.flatspec.AsyncFlatSpec
 
 import java.util.UUID
-import scala.concurrent.Future
 
 class JwtContentTest extends AsyncFlatSpec {
+  import monix.execution.Scheduler.Implicits.global
+  implicit override def executionContext = scala.concurrent.ExecutionContext.Implicits.global
 
-  implicit override def executionContext = scala.concurrent.ExecutionContext.Implicits.global // NEEDED !
   behavior of "Token"
 
   it should "ok creating new string token" in {
     val sig               = "abc"
-    def signer(s: String) = Future(sig)
+    def signer(s: String) = Task(sig)
     val x = JwtPayload(
       iat = System.currentTimeMillis() / 1000,
       exp = System.currentTimeMillis() / 1000 + 1000,
@@ -23,6 +24,7 @@ class JwtContentTest extends AsyncFlatSpec {
     )
     JwtContent
       .create(signer, x)
+      .runToFuture
       .map(p => assert(p.contains(sig)))
   }
 
