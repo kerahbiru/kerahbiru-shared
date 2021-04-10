@@ -13,7 +13,6 @@ enablePlugins(ScalaJSPlugin, ScalaJSBundlerPlugin, UniversalPlugin)
 libraryDependencies += "org.scalatest" %%% "scalatest" % "3.2.2" % "test" // %%% (for scala.js lib) not %% (normal scala lib)
 
 // Other dependencies
-
 val circeVersion = "0.14.0-M4"
 libraryDependencies += "io.circe" %%% "circe-core"    % circeVersion
 libraryDependencies += "io.circe" %%% "circe-generic" % circeVersion

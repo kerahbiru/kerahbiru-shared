@@ -1,11 +1,13 @@
 package com.kerahbiru.shared.jwt
 
+import cats.Monad
 import io.circe.generic.auto._
 import io.circe.parser.decode
 import io.circe.syntax.EncoderOps
 
 import java.nio.charset.StandardCharsets
 import java.util.Base64
+import scala.concurrent.{ExecutionContext, Future}
 import scala.scalajs.js.typedarray.{Int8Array, byteArray2Int8Array}
 import scala.util.{Failure, Success, Try}
 
@@ -29,9 +31,41 @@ object JwtContent {
       case Failure(_)     => None
     }
 
-  def encodeJwtHeaderPayload(jwtPayload: JwtPayload, jwtHeader: JwtHeader): String =
+  private def buildPreSign(jwtPayload: JwtPayload, jwtHeader: JwtHeader): String =
     Seq(jwtHeader.asJson.noSpaces, jwtPayload.asJson.noSpaces)
       .map(_.getBytes(StandardCharsets.UTF_8))
       .map(Base64.getUrlEncoder.withoutPadding().encodeToString)
       .mkString(".")
+
+  def create(signer: String => Future[String], jwtPayload: JwtPayload, jwtHeader: JwtHeader = JwtHeader.typical)(
+      implicit scheduler: ExecutionContext
+  ): Future[String] =
+    for {
+      a <- Future(buildPreSign(jwtPayload, jwtHeader))
+      b <- signer(a)
+      c <- Future(s"$a.$b")
+    } yield c
+
 }
+
+//trait Token[F[_]] {
+//  implicit def F: Monad[F]
+//
+//  def buildPreSign(jwtPayload: JwtPayload, jwtHeader: JwtHeader): String =
+//    Seq(jwtHeader.asJson.noSpaces, jwtPayload.asJson.noSpaces)
+//      .map(_.getBytes(StandardCharsets.UTF_8))
+//      .map(Base64.getUrlEncoder.withoutPadding().encodeToString)
+//      .mkString(".")
+//
+//  def sign(
+//      content: String
+//  ): F[String]
+//
+//  def create(jwtPayload: JwtPayload, jwtHeader: JwtHeader = JwtHeader.typical): F[String] =
+//    F.flatMap(F.point(buildPreSign(jwtPayload, jwtHeader))) { a =>
+//      F.map(sign(a)) { b =>
+//        s"$a.$b"
+//      }
+//    }
+//
+//}
