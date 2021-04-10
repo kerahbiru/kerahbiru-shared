@@ -32,20 +32,20 @@ object JwtContent {
       case Failure(_)     => None
     }
 
-  private def buildPreSign(jwtPayload: JwtPayload, jwtHeader: JwtHeader): String =
+  def buildPreSign(jwtPayload: JwtPayload, jwtHeader: JwtHeader): String =
     Seq(jwtHeader.asJson.noSpaces, jwtPayload.asJson.noSpaces)
       .map(_.getBytes(StandardCharsets.UTF_8))
       .map(Base64.getUrlEncoder.withoutPadding().encodeToString)
       .mkString(".")
 
-  def create(signer: String => Task[String], jwtPayload: JwtPayload, jwtHeader: JwtHeader = JwtHeader.typical)(implicit
-      scheduler: ExecutionContext
-  ): Task[String] =
-    for {
-      a <- Task(buildPreSign(jwtPayload, jwtHeader))
-      b <- signer(a)
-      c <- Task(s"$a.$b")
-    } yield c
+//  def create(signer: String => Task[String], jwtPayload: JwtPayload, jwtHeader: JwtHeader = JwtHeader.typical)(implicit
+//      scheduler: ExecutionContext
+//  ): Task[String] =
+//    for {
+//      a <- Task(buildPreSign(jwtPayload, jwtHeader))
+//      b <- signer(a)
+//      c <- Task(s"$a.$b")
+//    } yield c
 
 }
 
